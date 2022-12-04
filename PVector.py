@@ -12,3 +12,6 @@ class PVector:
 
     def dist(self, other_vector):
         return math.dist([self.x, self.y], [other_vector.x, other_vector.y])
+
+    def __str__(self) -> str:
+        return str([self.x, self.y])

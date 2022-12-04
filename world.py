@@ -32,7 +32,7 @@ class Bloop_World:
 
             # b.run()
             b.update()
-            # b.edge_collision()
+            b.edge_collision()
             # b.eat(self.food)
 
             # child = b.reproduce()
