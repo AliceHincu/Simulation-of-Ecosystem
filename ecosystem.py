@@ -47,14 +47,8 @@ if __name__ == '__main__':
     canvas.configure(bg='white')
 
     canvas.pack()
-    # win = GraphWin("My Window", 600, 800)
-    # win.setBackground(color_rgb(255, 255, 255))
-    # ball = Ball(100, 'brown', win)
-    # tk.mainloop()
 
-    world = world.Bloop_World(1, 1, win, canvas, width=W, height=H)
-    # while world.update():
-    #     world.draw()
+    world = world.Bloop_World(1, 15, win, canvas, width=W, height=H)
     world.update()
 
     win.mainloop()

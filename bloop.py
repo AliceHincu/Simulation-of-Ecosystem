@@ -55,11 +55,8 @@ class Bloop:
         self.health -= 0.5
 
     def draw(self):
-        gray_rgb = math.floor(translate(self.health, 200, 0, 0, 255))
-
+        gray_rgb = max(0, math.floor(translate(self.health, 200, 0, 0, 255)))
         self.canvas.itemconfig(self.circle, fill=color_rgb(gray_rgb, gray_rgb, gray_rgb))
-        # self.circle.setFill(color_rgb(gray_rgb, gray_rgb, gray_rgb))
-        # circle.draw(self.win)
 
     def edge_collision(self):
         if self.location.x < -self.size/2:
@@ -83,9 +80,10 @@ class Bloop:
 
     def eat(self, food):
         for f in food:
-            if self.location.dist(f) < self.size / 2:
+            if self.location.dist(f.location) < self.size / 2:
                 self.health += 100
                 food.remove(f)
+                self.canvas.delete(f.rectangle)
 
     # def reproduce(self):
     #     if random.random() < 0.0005:
