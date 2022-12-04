@@ -85,15 +85,14 @@ class Bloop:
                 food.remove(f)
                 self.canvas.delete(f.rectangle)
 
-    # def reproduce(self):
-    #     if random.random() < 0.0005:
-    #         childDNA = DNA.DNA()
-    #         childDNA.gene = self.dna.gene
-    #         child = Bloop(self.location.x, self.location.y, childDNA)
-    #
-    #         return child
-    #
-    #     return None
+    def reproduce(self):
+        if random.random() < 0.001:
+            child_dna = DNA.DNA()
+            child = Bloop(self.location.x, self.location.y, child_dna, self.window[0], self.window[1], self.win, self.canvas)
+
+            return child
+
+        return None
 
 
 def translate(value, leftMin, leftMax, rightMin, rightMax):

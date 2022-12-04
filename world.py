@@ -41,9 +41,9 @@ class Bloop_World:
             b.edge_collision()
             b.eat(self.food)
 
-            # child = b.reproduce()
-            # if child != None:
-            #     self.bloops.append(child)
+            child = b.reproduce()
+            if child is not None:
+                self.bloops.append(child)
 
         self.draw()
         self.win.after(40, self.update)
