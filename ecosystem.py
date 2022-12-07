@@ -37,8 +37,6 @@ W, H = 600, 800
 #             self.speedy *= -1
 #         # tk.after(40, self.movement)
 #         win.after(40, self.movement)
-
-
 if __name__ == '__main__':
     W, H = 1200, 600
     win = Tk()
@@ -49,6 +47,6 @@ if __name__ == '__main__':
     canvas.pack()
 
     world = world.Bloop_World(1, 15, win, canvas, width=W, height=H)
-    world.update()
+    world.start()
 
     win.mainloop()

@@ -30,6 +30,7 @@ class Bloop:
 
         # Object drawn
         self.circle = self.canvas.create_oval(self.location.x, self.location.y, self.location.x+self.size, self.location.y+self.size, fill='black', outline="")
+        self.nr_food_eaten = 0
 
     def run(self):
         self.update()
@@ -84,15 +85,16 @@ class Bloop:
                 self.health += 100
                 food.remove(f)
                 self.canvas.delete(f.rectangle)
+                self.nr_food_eaten += 1
 
-    def reproduce(self):
-        if random.random() < 0.001:
-            child_dna = DNA.DNA()
-            child = Bloop(self.location.x, self.location.y, child_dna, self.window[0], self.window[1], self.win, self.canvas)
-
-            return child
-
-        return None
+    # def reproduce(self, bloops):
+    #     if random.random() < 0.001:
+    #         child_dna = DNA.DNA()
+    #         child = Bloop(self.location.x, self.location.y, child_dna, self.window[0], self.window[1], self.win, self.canvas)
+    #
+    #         return child
+    #
+    #     return None
 
 
 def translate(value, leftMin, leftMax, rightMin, rightMax):
