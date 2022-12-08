@@ -1,10 +1,10 @@
-from PVector import PVector
 from bloop import Bloop
 from DNA import DNA
 import random
 
 from food import Food
-from graphics import *
+from natural_selection import GeneticAlgorithm2
+
 
 class Bloop_World:
     def __init__(self, population_size, food_quantity, graph_win, canvas, width=600, height=800):
@@ -16,8 +16,8 @@ class Bloop_World:
         self.height = height
         self.win = graph_win
         self.canvas = canvas
-        self.SECONDS = 5
-        self.ITERATIONS = 3
+        self.SECONDS = 10
+        self.ITERATIONS = 1
         self.current_iteration = 1
         self.time_passed_ms = 0
 
@@ -40,21 +40,14 @@ class Bloop_World:
             for f in self.food:
                 self.canvas.delete(f.rectangle)
 
-            # # reproduce
-            # # Place random bloops
-            # for i in range(self.population_size):
-            #     bloop = Bloop(random.randint(0, self.width), random.randint(0, self.height), DNA(), self.width,
-            #                   self.height, self.win, self.canvas)
-            #     self.bloops.append(bloop)
-            #
-            # # Place random food particles
-            # for i in range(self.food_quantity):
-            #     food = Food(random.randint(0, self.width), random.randint(0, self.height), self.canvas)
-            #     self.food.append(food)
+            bloops = list(filter(lambda bloop_elem: bloop_elem.nr_food_eaten >= 1, self.bloops))
 
             # delete old ones from list:
             self.bloops = []
             self.food = []
+
+            # --- reproduce
+            GeneticAlgorithm2().start_reproduction_iteration(bloops)
 
     def start(self):
         self.init_population()
@@ -79,13 +72,13 @@ class Bloop_World:
         if self.time_passed_ms >= self.SECONDS * 1000:
             self.current_iteration += 1
 
-            if self.current_iteration > self.ITERATIONS:
-                print("done!")
-                return
-
             # start the new bloop population and reset iteration clock
             self.init_population()
             self.time_passed_ms = 0
+
+            if self.current_iteration > self.ITERATIONS:
+                print("done!")
+                return
 
         self.draw()
         self.win.after(40, self.update)

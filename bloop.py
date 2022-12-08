@@ -9,6 +9,9 @@ from graphics import *
 
 
 class Bloop:
+    def __str__(self) -> str:
+        return str(self.nr_food_eaten)
+
     def __init__(self, x, y, dna, window_width, window_height, graph_win, canvas):
         self.location = PVector(x, y)
         self.window = [window_width, window_height]
