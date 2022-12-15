@@ -17,7 +17,7 @@ class Bloop_World:
         self.win = graph_win
         self.canvas = canvas
         self.SECONDS = 10
-        self.ITERATIONS = 1
+        self.ITERATIONS = 5
         self.current_iteration = 1
         self.time_passed_ms = 0
 
@@ -26,7 +26,7 @@ class Bloop_World:
         if self.current_iteration == 1:
             # Place random bloops
             for i in range(self.population_size):
-                bloop = Bloop(random.randint(0, self.width), random.randint(0, self.height), DNA(), self.width, self.height, self.win, self.canvas)
+                bloop = Bloop(random.randint(0, self.width), random.randint(0, self.height), DNA(random.uniform(0, 1)), self.width, self.height, self.win, self.canvas)
                 self.bloops.append(bloop)
 
             # Place random food particles
@@ -47,7 +47,16 @@ class Bloop_World:
             self.food = []
 
             # --- reproduce
-            GeneticAlgorithm2().start_reproduction_iteration(bloops)
+            self.bloops = GeneticAlgorithm2().start_reproduction_iteration(bloops)
+            # Place random food particles
+            self.food_quantity = self.food_quantity//2
+            for i in range(self.food_quantity):
+                food = Food(random.randint(0, self.width), random.randint(0, self.height), self.canvas)
+                self.food.append(food)
+            print("Reproduced!")
+
+            # if self.current_iteration == self.ITERATIONS:
+            #     GeneticAlgorithm2().plot_result(fitness_values, x, 0, self.current_iteration, len(self.bloops))
 
     def start(self):
         self.init_population()
@@ -73,6 +82,7 @@ class Bloop_World:
             self.current_iteration += 1
 
             # start the new bloop population and reset iteration clock
+            print("ITERATION " + str(self.current_iteration))
             self.init_population()
             self.time_passed_ms = 0
 

@@ -1,6 +1,6 @@
-from numpy.random import random
+import random
 
 
 class DNA :
-    def __init__(self) :
-        self.gene = random(1)
+    def __init__(self, random_number):
+        self.gene = random_number

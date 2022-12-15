@@ -1,3 +1,4 @@
+import itertools
 import math
 import random
 
@@ -9,10 +10,13 @@ from graphics import *
 
 
 class Bloop:
+    id_iter = itertools.count()
+
     def __str__(self) -> str:
-        return str(self.nr_food_eaten)
+        return str(self.id) + " " + str(self.nr_food_eaten) + " -> gene:" + str(self.dna.gene)
 
     def __init__(self, x, y, dna, window_width, window_height, graph_win, canvas):
+        self.id = next(self.id_iter)
         self.location = PVector(x, y)
         self.window = [window_width, window_height]
         self.health = 200

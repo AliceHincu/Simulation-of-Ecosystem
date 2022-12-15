@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
     canvas.pack()
 
-    world = world.Bloop_World(3, 15, win, canvas, width=W, height=H)
+    world = world.Bloop_World(20, 100, win, canvas, width=W, height=H)
     world.start()
 
     win.mainloop()
