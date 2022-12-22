@@ -2,10 +2,9 @@ import random
 
 import numpy as np
 import matplotlib.pyplot as plt
-from numpy import floor
 
-from DNA import DNA
-from bloop import Bloop
+from domain.DNA import DNA
+from domain.bloop import Bloop
 
 
 class GeneticAlgorithm2:

@@ -1,11 +1,12 @@
-from bloop import Bloop
-from DNA import DNA
+from domain.bloop import Bloop
+from domain.DNA import DNA
 import random
 
-from food import Food
+from domain.food import Food
 from natural_selection import GeneticAlgorithm2
 
 
+# speed vs size
 class Bloop_World:
     def __init__(self, population_size, food_quantity, graph_win, canvas, width=600, height=800):
         self.population_size = population_size
@@ -36,7 +37,7 @@ class Bloop_World:
         else:
             # delete current items on screen
             for b in self.bloops:
-                self.canvas.delete(b.circle)
+                self.canvas.delete(b.shape_drawn)
             for f in self.food:
                 self.canvas.delete(f.rectangle)
 

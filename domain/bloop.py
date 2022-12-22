@@ -4,7 +4,6 @@ import random
 
 import noise as noise
 
-import DNA
 from PVector import PVector
 from graphics import *
 
@@ -36,7 +35,7 @@ class Bloop:
         self.yOff = random.randint(0, 1000)
 
         # Object drawn
-        self.circle = self.canvas.create_oval(self.location.x, self.location.y, self.location.x+self.size, self.location.y+self.size, fill='black', outline="")
+        self.shape_drawn = self.canvas.create_oval(self.location.x, self.location.y, self.location.x + self.size, self.location.y + self.size, fill='black', outline="")
         self.nr_food_eaten = 0
 
     def run(self):
@@ -59,26 +58,26 @@ class Bloop:
         self.location.add(velocity)
 
         # Death always looming
-        self.canvas.move(self.circle, self.vx, self.vy)
+        self.canvas.move(self.shape_drawn, self.vx, self.vy)
         self.health -= 0.5
 
     def draw(self):
         gray_rgb = max(0, math.floor(translate(self.health, 200, 0, 0, 255)))
-        self.canvas.itemconfig(self.circle, fill=color_rgb(gray_rgb, gray_rgb, gray_rgb))
+        self.canvas.itemconfig(self.shape_drawn, fill=color_rgb(gray_rgb, gray_rgb, gray_rgb))
 
     def edge_collision(self):
         if self.location.x < -self.size/2:
             self.location.x = self.window[0] + self.size/2
-            self.canvas.coords(self.circle, self.location.x, self.location.y, self.location.x+self.size, self.location.y+self.size)
+            self.canvas.coords(self.shape_drawn, self.location.x, self.location.y, self.location.x + self.size, self.location.y + self.size)
         if self.location.y < -self.size/2:
             self.location.y = self.window[1] + self.size/2
-            self.canvas.coords(self.circle, self.location.x, self.location.y, self.location.x+self.size, self.location.y+self.size)
+            self.canvas.coords(self.shape_drawn, self.location.x, self.location.y, self.location.x + self.size, self.location.y + self.size)
         if self.location.x > self.window[0] + self.size/2:
             self.location.x = -self.size/2
-            self.canvas.coords(self.circle, self.location.x, self.location.y, self.location.x+self.size, self.location.y+self.size)
+            self.canvas.coords(self.shape_drawn, self.location.x, self.location.y, self.location.x + self.size, self.location.y + self.size)
         if self.location.y > self.window[1] + self.size/2:
             self.location.y = -self.size/2
-            self.canvas.coords(self.circle, self.location.x, self.location.y, self.location.x+self.size, self.location.y+self.size)
+            self.canvas.coords(self.shape_drawn, self.location.x, self.location.y, self.location.x + self.size, self.location.y + self.size)
 
     def is_dead(self):
         if self.health <= 0:
@@ -91,17 +90,8 @@ class Bloop:
             if self.location.dist(f.location) < self.size / 2:
                 self.health += 100
                 food.remove(f)
-                self.canvas.delete(f.rectangle)
+                self.canvas.delete(f.shape_drawn)
                 self.nr_food_eaten += 1
-
-    # def reproduce(self, bloops):
-    #     if random.random() < 0.001:
-    #         child_dna = DNA.DNA()
-    #         child = Bloop(self.location.x, self.location.y, child_dna, self.window[0], self.window[1], self.win, self.canvas)
-    #
-    #         return child
-    #
-    #     return None
 
 
 def translate(value, leftMin, leftMax, rightMin, rightMax):

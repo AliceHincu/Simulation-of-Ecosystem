@@ -1,6 +1,4 @@
-import bloop
-import world
-from graphics import *
+from worlds import world, animal_world
 from tkinter import *
 
 # java -jar processing_py/processing-py.jar bloop/ecosystem.py
@@ -46,7 +44,12 @@ if __name__ == '__main__':
 
     canvas.pack()
 
-    world = world.Bloop_World(20, 100, win, canvas, width=W, height=H)
+    # speed vs size
+    # world = world.Bloop_World(20, 100, win, canvas, width=W, height=H)
+    # world.start()
+
+    # get rid of predator
+    world = animal_world.AnimalWorld(20, win, canvas, width=W, height=H)
     world.start()
 
     win.mainloop()
